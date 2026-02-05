@@ -14,4 +14,4 @@ The application runs predominately on HTML, CSS, and JavaScript. I used Chatgpt 
 
 This project is deployed on GitHub Pages:
 
-- ADD LINK HERE
+- Check out Tasklet with this link. [https://t-davenport404.github.io/se_project_todo-app]
