@@ -1,14 +1,14 @@
-# Simple Todo App
+# Tasklet Simple in-browser Todo App
 
-Give a brief description of the project here. Feel free to give it a different name.
+This is a simple Todo App named Tasklet.
 
 ## Functionality
 
-Give a more detailed explanation of the project and its functionality.
+The application works in browsers and allows users to create a Todo list of tasks. It has checkboxes for completed tasks. It take text input and keeps track of detailed information. There is a date entry to set schedules. There is a delete button to remove tasks.
 
 ## Technology
 
-Give a description of the technologies and techniques used. Pictures, GIFs, or screenshots that detail the project features are recommended.
+The application runs predominately on HTML, CSS, and JavaScript. I used Chatgpt to come up with a name for it.
 
 ## Deployment
 
