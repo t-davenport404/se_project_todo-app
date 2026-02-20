@@ -7,8 +7,6 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import Section from "../components/Section.js";
 import TodoCounter from "../components/TodoCounter.js";
 
-// 1. Removed the old renderTodo function (Logic is now in Section and handleFormSubmit)
-
 const addTodoButton = document.querySelector(".button_action_add");
 const addTodoPopupEl = document.querySelector("#add-todo-popup");
 const addTodoForm = addTodoPopupEl.querySelector(".popup__form");
@@ -32,18 +30,15 @@ const generateTodo = (data) => {
   return todoElement;
 };
 
-// 2. Updated Section configuration
 const section = new Section({
-  items: initialTodos, // Pass the initial data
+  items: initialTodos,
   renderer: (item) => {
-    // Added the missing 'item' parameter
     const todoElement = generateTodo(item);
     section.addItem(todoElement);
   },
   containerSelector: ".todos__list",
 });
 
-// Render the initial list
 section.renderItems();
 
 const addTodoPopup = new PopupWithForm({
@@ -56,10 +51,8 @@ const addTodoPopup = new PopupWithForm({
     date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
 
     const id = uuidv4();
-    // 3. Added 'completed: false' so the Todo class works correctly
     const values = { name, date, id, completed: false };
 
-    // Use section.addItem to add the new todo
     const todoElement = generateTodo(values);
     section.addItem(todoElement);
 

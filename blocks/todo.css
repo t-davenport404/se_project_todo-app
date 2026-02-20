@@ -36,7 +36,6 @@
   font-size: 20px;
   line-height: 1.2;
 
-  /* Truncate text with ellipses, maximum of two rows. */
   text-overflow: ellipsis;
   overflow: hidden;
   display: -webkit-box;
