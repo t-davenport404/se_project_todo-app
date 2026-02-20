@@ -1,5 +1,3 @@
-import { initialTodos, validationConfig } from "../utils/constants.js";
-
 class Todo {
   constructor(data, selector, handleCheck, handleDelete) {
     this._completed = data.completed;
