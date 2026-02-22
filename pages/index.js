@@ -13,6 +13,21 @@ const addTodoForm = addTodoPopupEl.querySelector(".popup__form");
 
 const todoCounter = new TodoCounter(initialTodos, ".counter__text");
 
+const enableValidation = (settings) => {
+  const formList = Array.from(document.querySelectorAll(settings.formSelector));
+
+  const validators = new Map();
+
+  formList.forEach((formElement) => {
+    const formValidator = new FormValidator(settings, formElement);
+    formValidator.enableValidation();
+
+    validators.set(formElement, formValidator);
+  });
+
+  return validators;
+};
+
 function handleCheck(completed) {
   todoCounter.updateCompleted(completed);
 }
@@ -24,18 +39,25 @@ function handleDelete(completed) {
   todoCounter.updateTotal(false);
 }
 
-const generateTodo = (data) => {
-  const todo = new Todo(data, "#todo-template", handleCheck, handleDelete);
-  const todoElement = todo.getView();
-  return todoElement;
+const validators = enableValidation(validationConfig);
+
+const newTodoValidator = validators.get(addTodoForm);
+
+const createCard = (cardData) => {
+  const card = new Todo(cardData, "#todo-template", handleCheck, handleDelete);
+
+  return card.getView();
+};
+
+const renderCard = (cardData) => {
+  const cardElement = createCard(cardData);
+
+  section.addItem(cardElement);
 };
 
 const section = new Section({
   items: initialTodos,
-  renderer: (item) => {
-    const todoElement = generateTodo(item);
-    section.addItem(todoElement);
-  },
+  renderer: renderCard,
   containerSelector: ".todos__list",
 });
 
@@ -53,11 +75,11 @@ const addTodoPopup = new PopupWithForm({
     const id = uuidv4();
     const values = { name, date, id, completed: false };
 
-    const todoElement = generateTodo(values);
-    section.addItem(todoElement);
+    renderCard(values);
 
     todoCounter.updateTotal(true);
     addTodoPopup.close();
+
     newTodoValidator.resetValidation();
   },
 });
@@ -67,6 +89,3 @@ addTodoPopup.setEventListeners();
 addTodoButton.addEventListener("click", () => {
   addTodoPopup.open();
 });
-
-const newTodoValidator = new FormValidator(validationConfig, addTodoForm);
-newTodoValidator.enableValidation();
